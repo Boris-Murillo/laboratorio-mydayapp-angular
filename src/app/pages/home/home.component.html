@@ -15,7 +15,7 @@
   </header>
   <div class="container todoapp-wrapper">
     <!-- This section should be hidden by default and shown when there are todos -->
-    <section class="main">
+    <section class="main" *ngIf="items.length" >
       <ul class="todo-list">
         <li class="completed">
           <div class="view">

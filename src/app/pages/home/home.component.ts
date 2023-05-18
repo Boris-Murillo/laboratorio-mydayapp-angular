@@ -8,14 +8,20 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
   userInput: string = '';
   items: any[] = [];
   totalItems: number = 0;
 
-  // escuhar el evento del boton enter
+  ngOnInit(): void {
+    const items = localStorage.getItem('mydayapp-angular');
+    if (items) {
+      this.items = JSON.parse(items);
+      this.totalItems = this.items.length;
+    }
+  }
+
+  
+
   onEnterKey() {
     this.userInput = this.userInput.trim();
 
