@@ -8,6 +8,8 @@
         placeholder="Type new todo"
         autofocus
         type="text"
+        [(ngModel)]="userInput"
+        (keydown.enter)="onEnterKey()"
       />
     </div>
   </header>
