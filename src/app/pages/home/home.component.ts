@@ -42,4 +42,9 @@ export class HomeComponent implements OnInit {
     this.userInput = '';
   }
 
+  deleteItem(id: number) {
+    this.items = this.items.filter(item => item.id !== id);
+    localStorage.setItem('mydayapp-angular', JSON.stringify(this.items));
+  }
+
 }
