@@ -64,4 +64,9 @@ export class HomeComponent implements OnInit {
     localStorage.setItem('mydayapp-angular', JSON.stringify(this.items));
   }
 
+  clearCompleted() {
+    this.items = this.items.filter(item => !item.completed);
+    localStorage.setItem('mydayapp-angular', JSON.stringify(this.items));
+  }
+
 }
