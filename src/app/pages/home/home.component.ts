@@ -20,8 +20,6 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  
-
   onEnterKey() {
     this.userInput = this.userInput.trim();
 
@@ -45,6 +43,20 @@ export class HomeComponent implements OnInit {
   deleteItem(id: number) {
     this.items = this.items.filter(item => item.id !== id);
     localStorage.setItem('mydayapp-angular', JSON.stringify(this.items));
+  }
+
+  onCheckChange(id: number) {
+    this.items = this.items.map(item => {
+      if (item.id === id) {
+        item.completed = !item.completed;
+      }
+      return item;
+    });
+    localStorage.setItem('mydayapp-angular', JSON.stringify(this.items));
+  }
+
+  taskPending() {
+    this.items = this.items.filter(item => !item.completed);
   }
 
 }
