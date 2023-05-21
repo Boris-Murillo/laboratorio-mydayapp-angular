@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -6,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   userInput: string = '';
   items: any[] = [];
@@ -18,6 +20,13 @@ export class HomeComponent implements OnInit {
       this.items = JSON.parse(items);
       this.totalItems = this.items.length;
     }
+
+    if(this.router.url === '/pending'){
+      this.items = this.items.filter((item => !item.completed));
+    }else if(this.router.url === '/completed'){
+      this.items = this.items.filter((item => item.completed));
+    }
+   
   }
 
   onEnterKey() {
@@ -53,10 +62,6 @@ export class HomeComponent implements OnInit {
       return item;
     });
     localStorage.setItem('mydayapp-angular', JSON.stringify(this.items));
-  }
-
-  taskPending() {
-    this.items = this.items.filter(item => !item.completed);
   }
 
 }
