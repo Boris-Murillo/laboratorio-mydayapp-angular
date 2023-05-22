@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   userInput: string = '';
   items: any[] = [];
   totalItems: number = 0;
+  editing: boolean = false;
 
   ngOnInit(): void {
     const items = localStorage.getItem('mydayapp-angular');
@@ -29,7 +30,7 @@ export class HomeComponent implements OnInit {
    
   }
 
-  onEnterKey() {
+  saveTask() {
     this.userInput = this.userInput.trim();
 
     if (this.userInput === '') {
@@ -45,7 +46,6 @@ export class HomeComponent implements OnInit {
     });
 
     localStorage.setItem('mydayapp-angular', JSON.stringify(this.items));
-
     this.userInput = '';
   }
 
@@ -67,6 +67,26 @@ export class HomeComponent implements OnInit {
   clearCompleted() {
     this.items = this.items.filter(item => !item.completed);
     localStorage.setItem('mydayapp-angular', JSON.stringify(this.items));
+  }
+
+  editingTask(id: number, event: any) {
+    if (this.editing) {
+      return;
+    }
+    const parent = event.target.parentElement.parentElement;
+    parent.classList.add('editing');
+    this.editing = true;
+  }
+
+  editTask(id: number, event: any) {
+    const item = this.items.find(item => item.id === id);
+    if (item) {
+      item.title = event.target.value;
+    }
+    localStorage.setItem('mydayapp-angular', JSON.stringify(this.items));
+    const parent = event.target.parentElement;
+    parent.classList.remove('editing');
+    this.editing = false;
   }
 
 }
