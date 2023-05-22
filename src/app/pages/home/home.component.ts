@@ -30,6 +30,16 @@ export class HomeComponent implements OnInit {
    
   }
 
+  ngAfterViewInit(): void {
+    if(this.router.url === '/pending'){
+      document.querySelector('.pending')?.classList.add('selected');
+    }else if(this.router.url === '/completed'){
+      document.querySelector('.completed')?.classList.add('selected');
+    }else{
+      document.querySelector('.all')?.classList.add('selected');
+    }
+  }
+
   saveTask() {
     this.userInput = this.userInput.trim();
 
@@ -88,5 +98,5 @@ export class HomeComponent implements OnInit {
     parent.classList.remove('editing');
     this.editing = false;
   }
-
+  
 }
